@@ -1,5 +1,8 @@
 const initialState = {
     ref: null,
+    volume: 100,
+    paused: true,
+    repeat: false,
     shuffle: false,
     test: "TEST"
 }
@@ -11,9 +14,17 @@ export default function(state=initialState, action) {
             newState.ref = action.payload
             return newState;
         
+        case 'BTN_CLICKED_PAUSE_PLAY':
+            newState.paused = !newState.paused;
+            return newState;
+            
+        case 'BTN_CLICKED_REPEAT':
+            newState.repeat = !newState.repeat;
+            return newState;
+            
+        
         case 'VOLUME_CHANGE':
-            let volume = action.payload / 100;
-            newState.ref.volume = volume;
+            newState.volume = action.payload;
             return newState;
             
             

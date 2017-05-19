@@ -11,5 +11,17 @@ const initialState = [
 ]
 
 export default function(state=initialState, action) {
-    return state;
+    switch(action.type) {
+        case 'LOAD_SONG':
+            let tmpArr = []; // Copy state array
+            let topSongs = action.payload
+            for ( let i = 0; i < topSongs.length; i++ ) {
+                if ( 'preview_url' in topSongs[i] ) {
+                    tmpArr.push(new Song(topSongs[i].preview_url, topSongs[i].name ,32))
+                }
+            }
+            return tmpArr;
+        default:
+            return state;
+    }
 }
